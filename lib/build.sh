@@ -176,6 +176,7 @@ install_compass() {
   info "Installing Compass..."
   export GEM_HOME=$build_dir/.gem/ruby/1.9.1
   PATH="$GEM_HOME/bin:$PATH"
+  export PATH
   if test -d $cache_dir/ruby/.gem; then
     info "Restoring ruby gems directory from cache..."
     cp -r $cache_dir/ruby/.gem $build_dir
