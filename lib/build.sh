@@ -174,7 +174,7 @@ install_npm() {
 install_compass() {
   # install compass
   info "Installing Compass..."
-  export GEM_HOME=$build_dir/.gem/ruby/1.9.1
+  export GEM_HOME=$build_dir/.gem/ruby/2.2.0
   PATH="$GEM_HOME/bin:$PATH"
   export PATH
   if test -d $cache_dir/ruby/.gem; then
