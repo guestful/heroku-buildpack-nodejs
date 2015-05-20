@@ -173,11 +173,11 @@ install_npm() {
 
 install_compass() {
   # install compass
-  status "Installing Compass"
+  info "Installing Compass..."
   export GEM_HOME=$build_dir/.gem/ruby/1.9.1
   PATH="$GEM_HOME/bin:$PATH"
   if test -d $cache_dir/ruby/.gem; then
-    info "Restoring ruby gems directory from cache"
+    info "Restoring ruby gems directory from cache..."
     cp -r $cache_dir/ruby/.gem $build_dir
     HOME=$build_dir gem update compass --user-install --no-rdoc --no-ri
   else
