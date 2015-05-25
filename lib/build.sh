@@ -195,7 +195,7 @@ install_bower() {
 
 install_grunt() {
   info "Installing Grunt..."
-  npm install --unsafe-perm --quiet -g grunt 2>&1 >/dev/null | indent
+  npm install --unsafe-perm --quiet -g grunt-cli 2>&1 >/dev/null | indent
   PATH="$PATH:$build_dir/node_modules/.bin"
   export PATH
 }
