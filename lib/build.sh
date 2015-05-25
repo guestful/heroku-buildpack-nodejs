@@ -174,9 +174,6 @@ install_npm() {
 install_compass() {
   # install compass
   info "Installing Compass..."
-  export GEM_HOME=$build_dir/.gem/ruby/2.2.0
-  PATH="$PATH:$GEM_HOME/bin"
-  export PATH
   if test -d $cache_dir/ruby/.gem; then
     info "Restoring ruby gems directory from cache..."
     cp -r $cache_dir/ruby/.gem $build_dir
@@ -189,15 +186,11 @@ install_compass() {
 install_bower() {
   info "Installing Bower..."
   npm install --unsafe-perm --quiet -g bower 2>&1 >/dev/null | indent
-  PATH="$PATH:$build_dir/node_modules/.bin"
-  export PATH
 }
 
 install_grunt() {
   info "Installing Grunt..."
   npm install --unsafe-perm --quiet -g grunt-cli 2>&1 >/dev/null | indent
-  PATH="$PATH:$build_dir/node_modules/.bin"
-  export PATH
 }
 
 function build_dependencies() {
@@ -239,15 +232,18 @@ ensure_procfile() {
 write_profile() {
   info "Creating runtime environment"
   mkdir -p $build_dir/.profile.d
-  echo "export PATH=\"\$HOME/.heroku/node/bin:\$HOME/bin:\$HOME/node_modules/.bin:\$PATH\"" > $build_dir/.profile.d/nodejs.sh
+  echo "export PATH=\"\$HOME/.heroku/node/bin:\$HOME/bin:\$HOME/node_modules/.bin:\$HOME/.gem/ruby/2.2.0/bin:\$PATH\"" > $build_dir/.profile.d/nodejs.sh
   echo "export NODE_HOME=\"\$HOME/.heroku/node\"" >> $build_dir/.profile.d/nodejs.sh
+  echo "export GEM_HOME=\"\$HOME/.gem/ruby/2.2.0\"" >> $build_dir/.profile.d/nodejs.sh
   cat $bp_dir/lib/concurrency.sh >> $build_dir/.profile.d/nodejs.sh
 }
 
 write_export() {
   info "Exporting binary paths"
-  echo "export PATH=\"$build_dir/.heroku/node/bin:$build_dir/node_modules/.bin:\$PATH\"" > $bp_dir/export
+  echo "export PATH=\"$build_dir/.heroku/node/bin:$build_dir/node_modules/.bin:\$HOME/.gem/ruby/2.2.0/bin:\$PATH\"" > $bp_dir/export
   echo "export NODE_HOME=\"$build_dir/.heroku/node\"" >> $bp_dir/export
+  echo "export GEM_HOME=\"$build_dir/.gem/ruby/2.2.0\"" >> $bp_dir/export
+  . $bp_dir/export
 }
 
 clean_npm() {

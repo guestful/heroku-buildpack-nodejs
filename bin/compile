@@ -41,6 +41,11 @@ else
 fi
 warn_node_modules "$modules_source"
 
+####### Export binaries dependencies
+
+write_profile
+write_export
+
 ####### Vendor in binaries
 
 head "Installing binaries"
