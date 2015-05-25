@@ -243,7 +243,7 @@ write_export() {
   echo "export PATH=\"$build_dir/.heroku/node/bin:$build_dir/node_modules/.bin:\$HOME/.gem/ruby/2.2.0/bin:\$PATH\"" > $bp_dir/export
   echo "export NODE_HOME=\"$build_dir/.heroku/node\"" >> $bp_dir/export
   echo "export GEM_HOME=\"$build_dir/.gem/ruby/2.2.0\"" >> $bp_dir/export
-  #. $bp_dir/export
+  . $bp_dir/export
 }
 
 clean_npm() {
