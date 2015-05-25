@@ -175,7 +175,7 @@ install_compass() {
   # install compass
   info "Installing Compass..."
   export GEM_HOME=$build_dir/.gem/ruby/2.2.0
-  PATH="$GEM_HOME/bin:$PATH"
+  PATH="$PATH:$GEM_HOME/bin"
   export PATH
   if test -d $cache_dir/ruby/.gem; then
     info "Restoring ruby gems directory from cache..."
@@ -184,6 +184,20 @@ install_compass() {
   else
     HOME=$build_dir gem install compass --user-install --no-rdoc --no-ri
   fi
+}
+
+install_bower() {
+  info "Installing Bower..."
+  npm install --unsafe-perm --quiet -g bower 2>&1 >/dev/null | indent
+  PATH="$PATH:$build_dir/node_modules/.bin"
+  export PATH
+}
+
+install_grunt() {
+  info "Installing Grunt..."
+  npm install --unsafe-perm --quiet -g grunt 2>&1 >/dev/null | indent
+  PATH="$PATH:$build_dir/node_modules/.bin"
+  export PATH
 }
 
 function build_dependencies() {

@@ -51,6 +51,8 @@ else
 fi
 install_npm
 install_compass
+install_grunt
+install_bower
 
 ####### Build the project's dependencies
 
